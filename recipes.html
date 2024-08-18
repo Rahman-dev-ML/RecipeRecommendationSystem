@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes for {{ diet_type }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8; /* Lighter, soothing background */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF; /* Switched to a blue theme */
+            color: white;
+        }
+        tr:nth-child(odd) {
+            background-color: #f9f9f9; /* Zebra striping for rows */
+        }
+        tr:hover {
+            background-color: #e3f2fd; /* Light blue on hover for better visibility */
+        }
+        input[type="text"] {
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007BFF; /* Matching button color with header */
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Recipes for {{ diet_type }}</h1>
+    <form action="{{ url_for('search_recipes') }}" method="post">
+        <input type="text" name="recipe_name" placeholder="Search recipe by name">
+        <button type="submit">Search</button>
+    </form>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Cuisine</th>
+            <th>Protein (g)</th>
+            <th>Carbs (g)</th>
+            <th>Fat (g)</th>
+        </tr>
+        {% for recipe in recipes %}
+        <tr>
+            <td>{{ recipe.Recipe_name }}</td>
+            <td>{{ recipe.Cuisine_type }}</td>
+            <td>{{ recipe['Protein(g)'] }}</td>
+            <td>{{ recipe['Carbs(g)'] }}</td>
+            <td>{{ recipe['Fat(g)'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
